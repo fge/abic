@@ -61,9 +61,12 @@ public abstract class AbicCollection<E>
     @Override
     public final <T> T[] toArray(final T[] a)
     {
+        BUNDLE.checkNotNull(a, "core.nullArray");
         final Class<?> targetClass = a.getClass().getComponentType();
         if (!targetClass.isAssignableFrom(elementClass))
-            throw new ArrayStoreException();
+            throw new ArrayStoreException(BUNDLE.printf("core.arrayStore",
+                targetClass.getCanonicalName(),
+                elementClass.getCanonicalName()));
 
         final int targetSize = a.length;
 
