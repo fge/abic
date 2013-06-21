@@ -35,4 +35,11 @@ public final class AbicCollectionConstructorTest
                 BUNDLE.getMessage("core.nullElement"));
         }
     }
+
+    @Test
+    public void whenFedWithCorrectElementsConstructionSucceeds()
+    {
+        new TestCollection<Integer>(Integer.class, 1, 2, 3);
+        assertTrue(true);
+    }
 }
