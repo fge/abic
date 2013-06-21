@@ -130,6 +130,17 @@ public abstract class AbicCollection<E>
         return new AbicIterator<E>(this, index);
     }
 
+    @Override
+    public final String toString()
+    {
+        if (size == 0)
+            return "[]";
+        final StringBuilder sb = new StringBuilder("[").append(array[0]);
+        for (int i = 1; i < size; i++)
+            sb.append(", ").append(array[i]);
+        return sb.append(']').toString();
+    }
+
     private static final class AbicIterator<V>
         implements ListIterator<V>
     {
