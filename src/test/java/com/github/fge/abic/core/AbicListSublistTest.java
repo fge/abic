@@ -55,6 +55,17 @@ public final class AbicListSublistTest
         assertTrue(list.subList(4, 4).isEmpty());
     }
 
+    @Test
+    public void subListsAreViewsOfTheOriginal()
+    {
+        final List<MrBean> beans = new AbicList<MrBean>(MrBean.class,
+            new MrBean(), new MrBean(), new MrBean(), new MrBean());
+
+        beans.subList(1, 3).get(0).setVal(3);
+
+        assertEquals(beans.get(1).getVal(), 3);
+    }
+
     private static final class MrBean
     {
         private int val = 0;
