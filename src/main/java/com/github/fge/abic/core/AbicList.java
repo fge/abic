@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.ListIterator;
 
 public final class AbicList<E>
-    extends AbicCollection<E>
+    extends RegularAbicCollection<E>
     implements List<E>
 {
     private final int hashCode;
@@ -15,22 +15,6 @@ public final class AbicList<E>
     {
         super(elementClass, array);
         hashCode = Arrays.hashCode(this.array);
-    }
-
-    @Override
-    public boolean contains(final Object o)
-    {
-        return indexOf(o) != -1;
-    }
-
-    @Override
-    public boolean containsAll(final Collection<?> c)
-    {
-        BUNDLE.checkNotNull(c, "core.nullArgument");
-        for (final Object o: c)
-            if (!contains(o))
-                return false;
-        return true;
     }
 
     @Override
@@ -68,12 +52,7 @@ public final class AbicList<E>
     @Override
     public int indexOf(final Object o)
     {
-        if (o == null)
-            return -1;
-        for (int i = 0; i < size; i++)
-            if (array[i].equals(o))
-                return i;
-        return -1;
+        return doIndexOf(o);
     }
 
     @Override

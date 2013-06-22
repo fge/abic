@@ -96,6 +96,25 @@ public abstract class AbicCollection<E>
         throw new UnsupportedOperationException();
     }
 
+    protected abstract int doIndexOf(final Object o);
+
+    @Override
+    public final boolean contains(final Object o)
+    {
+        return doIndexOf(o) != -1;
+    }
+
+    @Override
+    public final boolean containsAll(final Collection<?> c)
+    {
+        BUNDLE.checkNotNull(c, "core.nullArgument");
+        for (final Object o: c)
+            if (!contains(o))
+                return false;
+        return true;
+    }
+
+
     @Override
     public final boolean addAll(final Collection<? extends E> c)
     {
