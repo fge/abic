@@ -8,6 +8,7 @@ import java.lang.reflect.Array;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.HashSet;
+import java.util.LinkedHashSet;
 import java.util.Set;
 
 final class ArrayHelpers
@@ -43,7 +44,7 @@ final class ArrayHelpers
         final T... elements)
     {
         BUNDLE.checkNotNull(elements, "core.nullArray");
-        final Set<T> set = new HashSet<T>(elements.length);
+        final Set<T> set = new LinkedHashSet<T>(elements.length);
         Collections.addAll(set, elements);
         return elementsOf(elementClass, set);
     }
