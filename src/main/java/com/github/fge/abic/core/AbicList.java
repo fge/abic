@@ -9,12 +9,9 @@ public final class AbicList<E>
     extends RegularAbicCollection<E>
     implements List<E>
 {
-    private final int hashCode;
-
     public AbicList(final Class<E> elementClass, final E... array)
     {
         super(elementClass, array);
-        hashCode = Arrays.hashCode(this.array);
     }
 
     @Override
@@ -96,7 +93,7 @@ public final class AbicList<E>
     @Override
     public int hashCode()
     {
-        return hashCode;
+        return Arrays.hashCode(array);
     }
 
     @Override

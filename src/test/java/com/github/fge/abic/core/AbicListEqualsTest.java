@@ -60,4 +60,47 @@ public final class AbicListEqualsTest
         assertFalse(list.equals(list2));
         assertFalse(list2.equals(list));
     }
+
+    @Test
+    public void mutableElementsTriggerListHashcodeChanges()
+    {
+        final Bin bin = new Bin();
+        final List<Bin> l1 = Arrays.asList(bin);
+        final List<Bin> l2 = new AbicList<Bin>(Bin.class, bin);
+
+        assertEquals(l1.hashCode(), l2.hashCode());
+
+        bin.setI(2);
+        assertEquals(l1.hashCode(), l2.hashCode());
+    }
+
+    private static final class Bin
+    {
+        private int i = 0;
+
+        private void setI(int i)
+        {
+            this.i = i;
+        }
+
+        @Override
+        public int hashCode()
+        {
+            return i;
+        }
+
+        @Override
+        public boolean equals(final Object obj)
+        {
+            if (obj == null)
+                return false;
+            if (this == obj)
+                return true;
+            if (getClass() != obj.getClass())
+                return false;
+            final Bin other = (Bin) obj;
+            return i == other.i;
+        }
+    }
+
 }
